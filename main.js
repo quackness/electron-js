@@ -13,6 +13,19 @@ const menuItems = [
     label: "File",
     submenu: [
       {
+        label: "New Window",
+        click: () => {
+          const secondWindow = new BrowserWindow({
+            width: 600,
+            height: 400,
+            show: false,
+            backgroundColor: '#eb4034'
+          });
+          secondWindow.loadFile("index2.html");
+          secondWindow.once('ready-to-show', () => secondWindow.show())
+        }
+      },
+      {
         label: "Learn more",
         click: () => {
           shell.openExternal('https://karolinaredden.com/');
