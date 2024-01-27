@@ -1,5 +1,33 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, Menu } = require('electron');
 const path = require('node:path')
+const menuItems = [
+  {
+    label: "Menu",
+    submenu: [
+      {
+        label: "About",
+      }
+    ]
+  },
+  {
+    label: "File",
+    submenu: [
+      {
+        label: "Learn more",
+      },
+      {
+        type: "separator",
+      },
+      {
+        label: "Exit",
+        click: app.quit()
+      }
+    ]
+  },
+];
+
+const menu = Menu.buildFromTemplate(menuItems);
+Menu.setApplicationMenu(menu);
 
 const createWindow = () => {
   const win = new BrowserWindow({
