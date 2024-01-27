@@ -20,7 +20,7 @@ const menuItems = [
       },
       {
         label: "Exit",
-        click: app.quit()
+        click: () => app.quit(),
       }
     ]
   },
