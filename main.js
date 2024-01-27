@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu } = require('electron');
+const { app, BrowserWindow, Menu, shell } = require('electron');
 const path = require('node:path')
 const menuItems = [
   {
@@ -14,6 +14,10 @@ const menuItems = [
     submenu: [
       {
         label: "Learn more",
+        click: () => {
+          shell.openExternal('https://karolinaredden.com/');
+
+        }
       },
       {
         type: "separator",
@@ -21,9 +25,26 @@ const menuItems = [
       {
         label: "Exit",
         click: () => app.quit(),
-      }
+      },
     ]
   },
+  {
+    label: "Window",
+    submenu: [
+      {
+        role: "minimize"
+      },
+      {
+        role: "zoomin"
+      },
+      {
+        role: "zoomout"
+      },
+      {
+        role: "close"
+      }
+    ]
+  }
 ];
 
 const menu = Menu.buildFromTemplate(menuItems);
