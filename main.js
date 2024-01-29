@@ -19,9 +19,25 @@ const menuItems = [
             width: 600,
             height: 400,
             show: false,
-            backgroundColor: '#eb4034'
+            backgroundColor: '#eb4034',
+            // movable: false
           });
           secondWindow.loadFile("index2.html");
+          secondWindow.once('ready-to-show', () => secondWindow.show())
+        }
+      },
+      {
+        label: "Open Camera",
+        click: () => {
+          const secondWindow = new BrowserWindow({
+            width: 600,
+            height: 400,
+            show: false,
+            backgroundColor: '#eb4034',
+            // movable: false
+          });
+          secondWindow.webContents.openDevTools();
+          secondWindow.loadFile("camera.html");
           secondWindow.once('ready-to-show', () => secondWindow.show())
         }
       },
