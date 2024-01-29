@@ -1,0 +1,1 @@
+// console.log("electron api from index.js", window.electronAPI);

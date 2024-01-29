@@ -14,9 +14,11 @@ captureButton.addEventListener("click", () => {
   //convert it to a usabe data url
   const dataURL = canvas.toDataURL();
   console.log("capture data", dataURL);
-  imageTag.src = dataURL;
+  //imageTag.src = dataURL;
+  window.electronAPI.sendImage(dataURL);
+});
 
-})
+console.log("api", window.electronAPI);
 
 navigator.mediaDevices.getUserMedia({ video: true }).then(stream => video.srcObject = stream);
 

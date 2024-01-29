@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, shell } = require('electron');
+const { app, BrowserWindow, Menu, shell, ipcMain } = require('electron');
 const path = require('node:path')
 const menuItems = [
   {
@@ -32,7 +32,10 @@ const menuItems = [
           const secondWindow = new BrowserWindow({
             width: 800,
             height: 500,
-            show: false
+            show: false,
+            webPreferences: {
+              preload: path.join(__dirname, "cameraPreload.js"),
+            }
           });
           secondWindow.webContents.openDevTools();
           secondWindow.loadFile("camera.html");
@@ -85,15 +88,19 @@ const createWindow = () => {
       preload: path.join(__dirname, 'preload.js')
     }
   })
-
+  win.webContents.openDevTools();
   win.loadFile('index.html')
 }
 
 app.whenReady().then(() => {
-  createWindow()
+  createWindow();
   //mac users, alow the window to activate window there is no window 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
+  });
+  ipcMain.on('set-image', (event, data) => {
+    console.log(data)
+
   })
 })
 //for mac users, keep the app icon in the task bar when closing the window
