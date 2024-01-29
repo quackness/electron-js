@@ -30,11 +30,9 @@ const menuItems = [
         label: "Open Camera",
         click: () => {
           const secondWindow = new BrowserWindow({
-            width: 600,
-            height: 400,
-            show: false,
-            backgroundColor: '#eb4034',
-            // movable: false
+            width: 800,
+            height: 500,
+            show: false
           });
           secondWindow.webContents.openDevTools();
           secondWindow.loadFile("camera.html");
