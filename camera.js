@@ -2,7 +2,7 @@
 console.log(navigator.mediaDevices)
 
 const video = document.querySelector("#camera");
-console.log(video)
+// console.log(video)
 video.autoplay = true;
 const captureButton = document.querySelector("#capture_img");
 const imageTag = document.querySelector("#image");
@@ -13,9 +13,11 @@ captureButton.addEventListener("click", () => {
   canvas.getContext("2d").drawImage(video, 0, 0, canvas.width, canvas.height);
   //convert it to a usabe data url
   const dataURL = canvas.toDataURL();
-  console.log("capture data", dataURL);
+  // console.log("capture data", dataURL);
   //imageTag.src = dataURL;
   window.electronAPI.sendImage(dataURL);
+  new Notification("Image captured", { body: "Image is successfully captured from live video" });
+
 });
 
 console.log("api", window.electronAPI);
