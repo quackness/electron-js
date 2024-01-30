@@ -37,6 +37,9 @@ const menuItems = [
               preload: path.join(__dirname, "cameraPreload.js"),
             }
           });
+          ipcMain.on('close-camera-window', () => {
+            secondWindow.close();
+          });
           secondWindow.webContents.openDevTools();
           secondWindow.loadFile("camera.html");
           secondWindow.once('ready-to-show', () => secondWindow.show())

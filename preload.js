@@ -12,7 +12,8 @@ window.addEventListener('DOMContentLoaded', () => {
 const { contextBridge, ipcRenderer } = require('electron');
 //move data from cemera window to main process, next step will be to move it to window 1
 contextBridge.exposeInMainWorld('electronAPI', {
-  getImage: (callback) => ipcRenderer.on('get-image', callback)
+  getImage: (callback) => ipcRenderer.on('get-image', callback),
+  closeCameraWindow: () => ipcRenderer.send('close-camera-window'),
 });
 
 
