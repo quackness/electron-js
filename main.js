@@ -87,7 +87,11 @@ const createWindow = () => {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
-  })
+  });
+  ipcMain.on('set-image', (event, data) => {
+    console.log(data);
+    win.webContents.send('get-image', data);
+  });
   win.webContents.openDevTools();
   win.loadFile('index.html')
 }
@@ -98,10 +102,6 @@ app.whenReady().then(() => {
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   });
-  ipcMain.on('set-image', (event, data) => {
-    console.log(data)
-
-  })
 })
 //for mac users, keep the app icon in the task bar when closing the window
 app.on('window-all-closed', () => {
